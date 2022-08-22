@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center pb-0 mb-0">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">Resume Maker</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-0">
+
+                <div class="card-body">
+
+                  <form class="g-3 needs-validation" method= 'post' action = "{%url 'login'%}"novalidate>
+                    {% csrf_token %}
+
+                  <div class="pt-4">
+                    <h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+                    <p class="text-center small">Enter your username &amp; password to login</p>
+                  </div>
+
+                 
+                    
+                    <div class="form-floating mb-2">
+                      <input type="email" name="email" class="form-control" id="yourEmail" placeholder="name@example.com" required>
+                      <label for="yourEmail" class="form-label ml-1">Your Email</label>
+                      <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                      <input type="password" name="password" class="form-control" id="yourPassword" placeholder="password" required>
+                      <label for="yourPassword" class="form-label">Password</label>
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12 mb-3 text-center">
+                      <p class="small mb-0">Forgot password? <a href="{% url 'register_page' %}">Click here.</a></p>
+                    </div>
+
+                    <div class="col-12 mb-2">
+                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                    </div>
+                    <div class="col-12 text-center">
+                      <p class="small mb-0">Don't have account? <a href="{% url 'register_page' %}">Create an account</a></p>
+                    </div>
+                  </form>
+
+                  {% comment %} <footer class="footer mt-2 pt-2 pb-0">
+                    <div class="copyright">
+                      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                      <!-- All the links in the footer should remain intact. -->
+                      <!-- You can delete the links only if you purchased the pro version. -->
+                      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main --> {% endcomment %}
+{% endblock %}

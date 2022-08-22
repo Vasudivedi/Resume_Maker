@@ -1,0 +1,259 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block main_content %}
+
+  <main>
+    <div class="container">
+
+      <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center pb-0 mb-0">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                  <img src="assets/img/logo.png" alt="">
+                  <span class="d-none d-lg-block">Resume Maker</span>
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-0">
+
+                <div class="card-body">
+
+                  {% if current_page == "register_page" %}
+                  <div class="pt-4">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+                    <p class="text-center small">Enter your personal details to create account</p>
+                  </div>
+                  {% else %}
+                  <div class="pt-4">
+                    <h5 class="card-title text-center pb-0 fs-4">Recover Password</h5>
+                    <p class="text-center small">Create your new password</p>
+                  </div>
+                  {% endif %}
+
+                  <div class="g-3">
+                    
+                    <style>
+                        ul.stepper {
+    margin: 1em -24px;
+    padding: 0 24px;
+}
+ul:not(.browser-default) {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+ul.stepper {
+    counter-reset: section;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+                        ul.stepper .step:not(:last-of-type).active {
+    padding-bottom: 36px;
+}
+ul.stepper>li:not(:last-of-type) {
+    padding-bottom: 10px;
+}
+ul.stepper .step {
+    position: relative;
+    transition: height .4s cubic-bezier(.4,0,.2,1),padding-bottom .4s cubic-bezier(.4,0,.2,1);
+}
+ul:not(.browser-default)>li {
+    list-style-type: none;
+}
+ul.stepper .step.active::before, ul.stepper .step.done::before {
+    background-color: #2196f3;
+}
+ul.stepper .step::before {
+    position: absolute;
+    counter-increment: section;
+    content: counter(section);
+    height: 26px;
+    width: 26px;
+    color: #fff;
+    background-color: #b2b2b2;
+    text-align: center;
+    line-height: 26px;
+    font-weight: 400;
+    transition: background-color .4s cubic-bezier(.4,0,.2,1);
+    font-size: 14px;
+    left: 1px;
+    top: 13px;
+    padding-left: 5px;
+    border-radius: 0 50px 50px 0;
+    padding-right: 4px;
+}
+ul.stepper .step:not(:last-of-type)::after {
+    content: '';
+    position: absolute;
+    top: 52px;
+    left: 13.5px;
+    width: 1px;
+    height: 40%;
+    height: calc(100% - 52px);
+    background-color: rgba(0,0,0,.1);
+    transition: height .4s cubic-bezier(.4,0,.2,1);
+}
+ul.stepper .step.active .step-title {
+    font-weight: 500;
+}
+ul.stepper .step .step-title {
+    margin: 0 -24px;
+    cursor: pointer;
+    padding: 15.5px 44px 24px 64px;
+    display: block;
+}
+.waves-effect {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: .3s ease-out;
+    transition: .3s ease-out;
+    vertical-align: middle;
+}
+ul.stepper .step .step-title::after {
+    content: attr(data-step-label);
+    display: block;
+    position: absolute;
+    font-size: 12.8px;
+    font-size: .8rem;
+    color: #424242;
+    font-weight: 400;
+}
+ul.stepper .step.active .step-content {
+    height: auto;
+    display: block;
+}
+ul.stepper .step .step-content {
+    position: relative;
+    display: none;
+    height: 0;
+    transition: height .4s cubic-bezier(.4,0,.2,1);
+    width: inherit;
+    overflow: visible;
+    margin-left: 41px;
+    margin-right: 24px;
+}
+ul.stepper .step .step-content .step-actions {
+    flex-direction: row;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+}
+ul.stepper .step .step-content .step-actions {
+    padding-top: 16px;
+    padding-bottom: 4px;
+    display: flex;
+    justify-content: flex-start;
+}
+                    </style>
+                    
+                    <div class="col-12">
+                        <ul class="stepper linear" id="linearStepper">
+                            <li class="step active">
+                                <div class="step-title waves-effect">Enter Email</div>
+                                <form method="post" action="{% url 'send_otp' %}" class="step-content email needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="form-floating mb-3">
+                                        <input type="email" name="email" class="form-control" id="yourEmail" placeholder="name@example.com" required>
+                                        <label for="yourEmail" class="form-label ml-1">Your Email</label>
+                                        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+                                    </div>
+                                    
+                                    <div class="step-actions">
+                                        <label class="d-none next-step">button</label>
+                                        <button class="btn btn-primary btn-sm rounded-pill m-auto" style="width: max-content;" type="submit">
+                                            <span class="loader spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                                            <span class="btn-label">Send</span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect">One Time Password</div>
+                                <form method="post" action="{% url 'varify_otp' %}" class="otp step-content needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="otp" class="form-control" id="otp" placeholder="One Time Password" required>
+                                        <label for="otp" class="form-label">One Time Password</label>
+                                        <div class="invalid-feedback">Please enter your OTP!</div>
+                                      </div>
+                                    <div class="step-actions">
+                                        <label class="d-none next-step">button</label>
+                                        <button class="btn btn-primary btn-sm rounded-pill m-auto" type="submit">
+                                            Verify <i class="ri-arrow-right-line"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            </li>
+                            <li class="step">
+                                <div class="step-title waves-effect">Create New Password</div>
+                                <form method="post" action="{% if current_page == 'register_page' %}/register/{% else %}/change_pwd/{% endif %}" class="password step-content needs-validation" novalidate>
+                                    {% csrf_token %}
+                                    <div class="form-floating mb-3">
+                                        <input type="password" name="new_password" class="form-control" id="new_password" placeholder="confirm password" required>
+                                        <label for="new_password" class="form-label">Enter Password</label>
+                                        <div class="invalid-feedback">Please enter your password!</div>
+                                      </div>
+                        
+                                    <div class="step-actions">
+                                        <div class="row">
+                                            <div class="col m6 s12 mb-1">
+                                                <button class="waves-effect waves-dark btn btn-primary" type="submit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+<!-- 
+                    <div class="col-12 text-center">
+                      <p class="small mb-0"><a href="{% url 'register_page' %}">Create an account</a> or <a href="{% url 'login_page' %}">Login to your account</a></p>
+                    </div> -->
+                {% comment %} </div>
+
+                  <footer class="footer mt-2 pt-2 pb-0">
+                    <div class="copyright">
+                      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                      <!-- All the links in the footer should remain intact. -->
+                      <!-- You can delete the links only if you purchased the pro version. -->
+                      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                    </div>
+                    <button type="button" class="btn-close d-none" data-bs-dismiss="alert" data-bs-target="#alert" aria-label="Close">close</button>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main><!-- End #main --> {% endcomment %}
+{% endblock %}
+
+{% block scripts %}
+<script src="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/materialize-stepper/materialize-stepper.min.js"></script>
+<script src="https://pixinvent.com/materialize-material-design-admin-template/app-assets/js/scripts/form-wizard.min.js"></script>
+
+
+{% endblock %}

@@ -1,0 +1,560 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,800&display=swap" rel="stylesheet">
+	<link href="{% static 'css/resume/yellow-black.css' %}" rel="stylesheet">
+	<link href="{% static 'css/resume/style.css' %}" rel="stylesheet">
+	<title>Resume Page</title>
+</head>
+<body class="with-header position-relative" data-spy="scroll" data-target="#sections-nav" data-offset="80">
+	<header class="header">
+		<div class="container-fluid-limited d-flex align-items-center justify-content-between">
+			{% comment %} <a href="index.html" class="header-brand">
+				<img src="assets/img/logo_b.svg" data-light-src="assets/img/logo.svg" data-dark-src="assets/img/logo_b.svg" alt="Your logo">
+			</a> {% endcomment %}
+			<button class="sections-nav-toggler" aria-label="Toggle navigation">
+				<span class="sections-nav-toggler-bar"></span>
+				<span class="sections-nav-toggler-bar"></span>
+				<span class="sections-nav-toggler-bar"></span>
+				<span class="sections-nav-toggler-bar"></span>
+			</button>
+		</div>
+	</header>
+	<nav class="sections-nav-container">
+		<ul id="sections-nav" class="nav sections-nav sections-nav-animated">
+			<li class="sections-nav-item">
+				<a href="#section-01" class="nav-link sections-nav-link goto-section active">
+					My Profile
+				</a>
+			</li>
+			<li class="sections-nav-item">
+				<a href="#section-02" class="nav-link sections-nav-link goto-section">
+					
+					About me
+				</a>
+			</li>
+			<li class="sections-nav-item">
+				<a href="#section-03" class="nav-link sections-nav-link goto-section">
+				
+					Education
+				</a>
+			</li>
+
+			{% if resume_data.skills %}
+			<li class="sections-nav-item">
+				<a href="#section-04" class="nav-link sections-nav-link goto-section">
+					
+					Skills
+				</a>
+			</li>
+			{% endif %}
+
+			{% if resume_data.projects %}
+			<li class="sections-nav-item">
+				<a href="#section-05" class="nav-link sections-nav-link goto-section">
+					Projects
+				</a>
+			</li>
+			{% endif %}
+
+			{% if resume_data.experiences %}
+			<li class="sections-nav-item">
+				<a href="#section-06" class="nav-link sections-nav-link goto-section">
+					Experience
+				</a>
+			</li>
+			{% endif %}
+
+			{% if resume_data.refrences %}
+			<li class="sections-nav-item">
+				<a href="#section-07" class="nav-link sections-nav-link goto-section">
+					References
+				</a>
+			</li>
+			{% endif %}
+
+            
+				<li class="sections-nav-item">
+					<a href="#section-08" class="nav-link sections-nav-link goto-section">
+						Contact Detail
+					</a>
+				</li>
+
+				
+				<li class="sections-nav-item">
+					<a href="#section-09" class="nav-link sections-nav-link goto-section">
+						Social Links
+					</a>
+				</li>
+				
+
+			
+			<li class="sections-nav-item">
+				<div class="sections-nav-info">
+				{% comment %} <h2>{{profile_data.Username}}</h2>
+                <h3>{{profile_data.About	}}</h3> {% endcomment %}
+				</div>
+			</li>
+		</ul>
+	</nav>
+	<main class="content">
+		<div class="container-fluid-limited">
+			<div class="row">
+				<div class="col col-xl-9">
+					<section id="section-01" class="section section-sub-header animation interaction-in">
+						<div class="section-body">
+							<div class="jumbotron jumbotron-fluid pt-6 pt-lg-8 pb-0 mb-0">
+								<img src="/uploads/{{resume_data.profile_data.Image}}" class="jumbotron-img animation-translate animation-item-1" alt="Avatar">
+								<h1 class="display-1 display-animated display-animated-in animation-translate animation-item-2">{{resume_data.profile_data.FullName}}</h1>
+								<p class="lead animation-translate animation-item-3"></p>
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-4">
+							<a class="section-next goto-section" href="#section-02">
+								<span class="section-next-counter">01/10</span>
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					<section id="section-02" class="section animation">
+						<div class="section-body">
+							<div class="row">
+								<div class="col col-xl-10">
+									<h2 class="section-title animation-translate-overline animation-item-1">About me</h2>
+									<article class="article animation-translate animation-item-2">
+										<p>{{resume_data.profile_data.About}}</p>
+										<p>{{resume_data.profile_data.Address}}</p>
+										<p>{{resume_data.profile_data.State}}</p>
+										<p><a href="tel:{{resume_data.profile_data.Mobile}}">{{resume_data.profile_data.Mobile}}</a></p>
+										
+									</article>
+								</div>
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-3">
+							<a class="section-next goto-section" href="#section-03">
+								
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					<section id="section-03" class="section animation">
+						{% if resume_data.experiences %}
+					<section id="section-03" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Education</h2>
+							<div class="timeline timeline-animated">
+								{% for education in resume_data.educations %}
+								<div class="timeline-item">
+									<span class="timeline-date">{{education.StartDate}}&nbsp;–&nbsp;{{education.EndDate}}</span>
+									<h3 class="timeline-title">{{education.BoardUniversity}}</h3>
+									<p class="timeline-text">{{education.CourseStream}}</p>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-2">
+							<a class="section-next goto-section" href="#section-07">
+								
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					{% endif %}
+					
+					{% if resume_data.skills %}
+					<section id="section-04" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Skills</h2>
+							<div class="row animation-translate animation-item-2">
+								<div class="col-12 col-md-6">
+									{% for skill in resume_data.skills %}
+									<strong class="progress-label">{{skill.skill}}</strong>
+									<div class="progress progress-animated mb-9">
+										<div class="progress-bar" role="progressbar" style="width: {{skill.level}}%" aria-valuenow="{{skill.level}}" aria-valuemin="0" aria-valuemax="100"></div>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-3">
+							<a class="section-next goto-section" href="#section-05">
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					{% endif %}
+
+					{% if resume_data.projects %}
+					<section id="section-05" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Proojects</h2>
+							<div class="timeline timeline-animated">
+								{% for project in resume_data.projects %}
+								<div class="timeline-item">
+								    <h3 class="timeline-title">{{project.Title}}</h3>
+									<p class="timeline-text">{{project.Description}}</p>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-2">
+							<a class="section-next goto-section" href="#section-07">
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					{% endif %}
+					
+
+					
+
+					{% if resume_data.experiences %}
+					<section id="section-06" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Experiences</h2>
+							<div class="timeline timeline-animated">
+								{% for experience in resume_data.experiences %}
+								<div class="timeline-item">
+									<span class="timeline-date">{{experience.StartDate}}&nbsp;–&nbsp;{{experience.EndDate}}</span>
+									<h3 class="timeline-title">{{experience.Company}}</h3>
+									<p class="timeline-text">{{experience.JobTitle}}</p>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-2">
+							<a class="section-next goto-section" href="#section-07">
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					{% endif %}
+
+					{% if resume_data.refrences %}
+					<section id="section-07" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">References</h2>
+							<div class="timeline timeline-animated">
+								{% for refrence in resume_data.refrences %}
+								<div class="timeline-item">
+									
+									<h3 class="timeline-title"><a href="{{refrence.Link}}" target="_blank">Visit</a></h3>
+									<p class="timeline-text">{{refrence.Description}}</p>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-2">
+							<a class="section-next goto-section" href="#section-07">
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					{% endif %}
+
+
+
+					
+					<section id="section-08" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Contact</h2>
+							<div class="row mb-10 animation-translate animation-item-2">
+								<div class="col-12 col-md-4">
+									<div class="contact">
+										<strong class="contact-label">Stay in touch</strong>
+										<p>{{resume_data.profile_data.FullName}}</p>
+								<p class="lead animation-translate animation-item-3">{{resume_data.profile_data.Mobile}}</p>
+									</div>
+								</div>
+								<div class="col-12 col-md-4">
+									<div class="contact">
+										<strong class="contact-label">Social</strong>
+										<a href="https://www.facebook.com">Facebook</a><br>
+										<a href="https://www.linked.com">LinekdIn</a><br>
+										<a href="https://www.twitter.com">Twitter</a>
+									</div>
+								</div>
+								<div class="col-12 col-md-4">
+									<div class="contact">
+										<strong class="contact-label">Address</strong>
+										<p>{{resume_data.profile_data.Address}}</p>
+
+										
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-12 col-xl-9">
+									<h3 class="section-subtitle animation-translate animation-item-3">Leave a message</h3>
+									<form class="needs-validation animation-translate animation-item-4" novalidate method ="POST" action="{% url 'mail_send' %}">
+										{% csrf_token %}
+										<div class="row">
+											<input type="hidden" class="form-control" name="username" placeholder="@" value="{{resume_data.profile_data.UserName}}">
+
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label for="contact-form-name">E-mail</label>
+													<input type="email" class="form-control" name="email" id="contact-form-email" placeholder="@" required>
+													<div class="invalid-feedback">Please enter a valid e-mail address.</div>
+												</div>
+											</div>
+											<div class="col-12 col-md-6">
+												<div class="form-group">
+													<label for="contact-form-name">Subject</label>
+													<input type="text" class="form-control" name="subject" id="contact-form-subject" placeholder="subject" required>
+													<div class="invalid-feedback">Subject</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="contact-form-message">Message</label>
+											<textarea class="form-control" name="message" id="contact-form-message" placeholder="Your message" rows="5" required></textarea>
+											<div class="invalid-feedback">Please type some message.</div>
+										</div>
+										<button type="submit" class="btn btn-primary">Send</button>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-5">
+							<span class="section-next goto-section">
+					        </span>
+						</div>
+					</section>
+
+					<section id="section-09" class="section animation">
+						<div class="section-body">
+							<h2 class="section-title animation-translate-overline animation-item-1">Social Links</h2>
+							<div class="timeline timeline-animated">
+								{% for social_link in resume_data.social_links %}
+								<div class="timeline-item">
+									
+									<h3 class="timeline-title"><a href="{{social_link.Link}}" target="_blank">Visit</a></h3>
+									<p class="timeline-text">{{social_link.Name}}</p>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<div class="section-footer animation-translate animation-item-2">
+							<a class="section-next goto-section" href="#section-07">
+								<span class="section-next-label">Next chapter</span>
+								<span class="section-next-icon"></span>
+							</a>
+						</div>
+					</section>
+					
+				</div>
+			</div>
+		</div>
+	</main>
+	<!-- Modals -->
+	<div id="modal-project-1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+		<div class="modal-dialog modal-fluid">
+			<div class="modal-content">
+				<div class="modal-header">
+					&nbsp;
+					<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+						<span class="d-none">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<article class="article">
+						<div class="article-header">
+							<h2 class="article-title">Nanovo</h2>
+							<h3 class="article-subtitle">Design e-shop</h3>
+							<p class="article-tags">Design — Frontend — Backend</p>
+						</div>
+						<div class="row flex-column-reverse flex-lg-row">
+							<div class="col-12 col-lg-6">
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+									eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+									takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+									consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+									dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+									dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+									ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+									diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+									diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+								</p>
+								<p>
+									Stet clita, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+									dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+									ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+									et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+									est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+									elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+									erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+									Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+							</div>
+							<div class="col-12 col-lg-6">
+								<img class="img-fluid mb-10" src="assets/img/project_1.jpg" alt="Nanovo">
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modal-project-2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+		<div class="modal-dialog modal-fluid">
+			<div class="modal-content">
+				<div class="modal-header">
+					&nbsp;
+					<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+						<span class="d-none">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<article class="article">
+						<div class="article-header">
+							<h2 class="article-title">Bbop</h2>
+							<h3 class="article-subtitle">Social Network for Musicians</h3>
+							<p class="article-tags">Design — Frontend — Backend</p>
+						</div>
+						<div class="row flex-column-reverse flex-lg-row">
+							<div class="col-12 col-lg-6">
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+									eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+									takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+									consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+									dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+									dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+									ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+									diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+									diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+								</p>
+								<p>
+									Stet clita, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+									dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+									ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+									et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+									est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+									elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+									erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+									Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+							</div>
+							<div class="col-12 col-lg-6">
+								<img class="img-fluid mb-10" src="assets/img/project_2.jpg" alt="Nanovo">
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="modal-project-3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal" aria-hidden="true">
+		<div class="modal-dialog modal-fluid">
+			<div class="modal-content">
+				<div class="modal-header">
+					&nbsp;
+					<button type="button" class="modal-close" data-dismiss="modal" aria-label="Close">
+						<span class="d-none">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<article class="article">
+						<div class="article-header">
+							<h2 class="article-title">Janja Prokić</h2>
+							<h3 class="article-subtitle">Jewelry e-shop</h3>
+							<p class="article-tags">Frontend — Backend</p>
+						</div>
+						<div class="row flex-column-reverse flex-lg-row">
+							<div class="col-12 col-lg-6">
+								<p>
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+									eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+									takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
+									consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+									dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+									dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+									ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+									diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+									diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+								</p>
+								<p>
+									Stet clita, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+									dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
+									ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+									et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+									est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
+									elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
+									erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+									Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+									Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+									tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+								</p>
+							</div>
+							<div class="col-12 col-lg-6">
+								<img class="img-fluid mb-10" src="assets/img/project_2.jpg" alt="Nanovo">
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="preview-themes">
+		<a href="#theme-yellow-black" class="preview-theme preview-color-yellow-black" title="Select theme" data-toggle="tooltip" data-theme="{% static 'css/resume/yellow-black.css' %}" data-theme-bg="light"></a>
+		<a href="#theme-black-white" class="preview-theme preview-color-black-white" title="Select theme" data-toggle="tooltip" data-theme="{% static 'css/resume/black-white.css' %}" data-theme-bg="dark"></a>
+		<a href="#theme-pink-black" class="preview-theme preview-color-pink-black" title="Select theme" data-toggle="tooltip" data-theme="{% static 'css/resume/pink-black.css' %}" data-theme-bg="light"></a>
+		<a href="#theme-blue-black" class="preview-theme preview-color-blue-black" title="Select theme" data-toggle="tooltip" data-theme="{% static 'css/resume/blue-black.css' %}" data-theme-bg="light"></a>
+	</div>
+</body>
+<script src="{% static 'js/resume/resume.js' %}"></script>
+<script>
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip();
+
+		$('.preview-theme').click(function () {
+			$('link')[1].href = $(this).data('theme');
+			var imgSrcData = $(this).data('theme-bg') === 'light' ? 'dark-src' : 'light-src';
+			$('img[data-' + imgSrcData + ']').each(function () {
+				$(this).attr('src', $(this).data(imgSrcData));
+			});
+
+			return false;
+		});
+	});
+
+	// Bootstrap form validation example
+	(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			var forms = document.getElementsByClassName('needs-validation');
+			var validation = Array.prototype.filter.call(forms, function(form) {
+				form.addEventListener('submit', function(event) {
+					if (form.checkValidity() === false) {
+						event.preventDefault();
+						event.stopPropagation();
+					}
+					form.classList.add('was-validated');
+				}, false);
+			});
+		}, false);
+	})();
+</script>
+</html>
